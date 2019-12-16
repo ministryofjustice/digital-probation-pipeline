@@ -15,7 +15,6 @@ def call(Map pipelineParams) {
             stage('Unit Test') {
                 steps {
                     container('gradle') {
-                        sh "echo HELLO"
                         sh "gradle clean test"
                     }
                 }
