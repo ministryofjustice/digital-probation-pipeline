@@ -9,7 +9,7 @@ def call(Map pipelineParams) {
 
         options {
             // Fails the job if it takes longer than this
-            timeout(time: 30, unit: 'MINUTES')
+            timeout(time: 60, unit: 'MINUTES')
         }
 
         stages {
