@@ -20,20 +20,20 @@ def call(Map pipelineParams) {
                     }
                 }
             }
-            parallel (stage('Coverage') {
+            stage('Coverage') {
                 steps {
                     container('gradle') {
                         sh "gradle jacocoTestReport jacocoTestCoverageVerification"
                     }
                 }
-            },
+            }
             stage('OWASP Dependency check') {
                 steps {
                     container('dependency-check') {
                         sh './dependency-check.sh > /dev/null'
                     }
                 }
-            })
+            }
             stage('Sonar scanner') {
                 steps {
                     container('sonar-scanner') {
