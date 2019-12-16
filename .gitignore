@@ -1,0 +1,8 @@
+/.gradle/
+/configuration/build/
+/service/build/
+project.properties
+/integration/build/
+.idea/
+.sonar/
+.scannerwork/
