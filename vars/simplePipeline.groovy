@@ -8,6 +8,7 @@ def call(Map pipelineParams) {
         }
 
         options {
+            // Fails the job if it takes longer than this
             timeout(time: 30, unit: 'MINUTES')
         }
 
@@ -19,20 +20,20 @@ def call(Map pipelineParams) {
                     }
                 }
             }
-            stage('Coverage') {
+            parallel (stage('Coverage') {
                 steps {
                     container('gradle') {
                         sh "gradle jacocoTestReport jacocoTestCoverageVerification"
                     }
                 }
-            }
+            },
             stage('OWASP Dependency check') {
                 steps {
                     container('dependency-check') {
                         sh './dependency-check.sh > /dev/null'
                     }
                 }
-            }
+            })
             stage('Sonar scanner') {
                 steps {
                     container('sonar-scanner') {
