@@ -7,6 +7,10 @@ def call(Map pipelineParams) {
             }
         }
 
+        options {
+            timeout(time: 5, unit: 'MINUTES')
+        }
+
         stages {
             stage('Unit Test') {
                 steps {
