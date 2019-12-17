@@ -3,12 +3,15 @@ Reusable pipeline-as-code snippets. The use of these snippets depends on the def
  to this repository. At the current time, this is done in the digital-probation-tooling project which deploys Jenkins in Kubernetes. 
 
 # Usage
-The snippets can be used as follows. This shows the use of simplePipeline, via a library definition named "digital-probation-pipeline"
+The snippets can be used as follows. This shows the use of simplePipeline, via a library definition named "digital-probation-pipeline". A branch
+ name can be added as shown and could be drawn from environment variables.
 
 ```groovy
-@Library('digital-probation-pipeline')
+library(
+  identifier: 'digital-probation-pipeline@${your branch name}'
+)
 
-simplePipeline
+simplePipeline()
 ```
 
 # Snippets
