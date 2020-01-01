@@ -45,6 +45,15 @@ def call(Map pipelineParams) {
                     }
                 }
             }
+            if (true) {
+                stage('docker') {
+                    container('docker-in-docker') {
+                        sh 'docker images'
+                        sh 'docker build  -f service/docker/Dockerfile -t skeleton  .'
+                        sh 'docker images'
+                    }
+                }
+            }
         }
         post {
             always {
