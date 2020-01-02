@@ -16,7 +16,7 @@ def call(Map pipelineParams) {
             stage('Unit Test') {
                 steps {
                     container('gradle') {
-                        sh "gradle clean test"
+                        sh "gradle clean build"
                     }
                 }
             }
@@ -30,7 +30,7 @@ def call(Map pipelineParams) {
             stage('OWASP Dependency check') {
                 steps {
                     container('dependency-check') {
-                        sh './dependency-check.sh > /dev/null'
+                        sh './dependency-check.sh'
                     }
                 }
             }
@@ -45,7 +45,19 @@ def call(Map pipelineParams) {
                     }
                 }
             }
-        }
+            stage('Docker') {
+                when {
+                    expression {
+                        return (pipelineParams.dockerFile != '' && pipelineParams.dockerImageTag != '');
+                    }
+                }
+                steps {
+                    container('docker-in-docker') {
+                        sh 'docker build  -f ' + pipelineParams.dockerFile + ' -t ' + pipelineParams.dockerImageTag + ' .'
+                        sh 'docker images'
+                    }
+                }
+            }        }
         post {
             always {
                 echo 'Verify that the dependency check reports have been deleted by counting files in the ./dependency-check-report directory before and after deletion'
