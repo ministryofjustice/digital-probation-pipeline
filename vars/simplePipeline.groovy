@@ -27,13 +27,13 @@ def call(Map pipelineParams) {
                     }
                 }
             }
-//            stage('OWASP Dependency check') {
-//                steps {
-//                    container('dependency-check') {
-//                        sh './dependency-check.sh'
-//                    }
-//                }
-//            }
+            stage('OWASP Dependency check') {
+                steps {
+                    container('dependency-check') {
+                        sh './dependency-check.sh > /dev/null'
+                    }
+                }
+            }
             stage('Sonar scanner') {
                 steps {
                     container('sonar-scanner') {
