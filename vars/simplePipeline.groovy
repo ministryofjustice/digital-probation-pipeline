@@ -52,7 +52,7 @@ def call(Map pipelineParams) {
                     }
                 }
                 steps {
-                    container('docker-in-docker') {
+                    container('docker-cli') {
                         sh 'docker build  -f ' + pipelineParams.dockerFile + ' -t ' + pipelineParams.dockerImageTag + ' .'
                         sh 'docker images'
                     }
