@@ -45,19 +45,7 @@ def call(Map pipelineParams) {
                     }
                 }
             }
-            stage('Docker') {
-                when {
-                    expression {
-                        return (pipelineParams != null && pipelineParams.dockerFile != '' && pipelineParams.dockerImageTag != '');
-                    }
-                }
-                steps {
-                    container('docker-cli') {
-                        sh 'docker build  -f ' + pipelineParams.dockerFile + ' -t ' + pipelineParams.dockerImageTag + ' .'
-                        sh 'docker images'
-                    }
-                }
-            }        }
+        }
         post {
             always {
                 echo 'Verify that the dependency check reports have been deleted by counting files in the ./dependency-check-report directory before and after deletion'
