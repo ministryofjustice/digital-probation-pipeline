@@ -4,3 +4,7 @@ apply plugin: 'groovy'
 repositories {
     jcenter()
 }
+
+dependencies {
+    testImplementation("com.lesfurets:jenkins-pipeline-unit:1.1")
+}
