@@ -48,7 +48,7 @@ def call(Map pipelineParams) {
             stage('Docker') {
                 when {
                     expression {
-                        return (pipelineParams.dockerFile != '' && pipelineParams.dockerImageTag != '');
+                        return (pipelineParams != null && pipelineParams.dockerFile != '' && pipelineParams.dockerImageTag != '');
                     }
                 }
                 steps {
